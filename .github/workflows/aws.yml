@@ -42,7 +42,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.EC2_PUBLIC_IP }}
         REMOTE_USER: ${{ env.EC2_USER }}
         TARGET: ${{ env.TARGET_DIR }}
-        ARGS: "-rltgoDzv --no-perms --no-owner --no-group --delete --exclude='.git/' --exclude='.github/'"
+        ARGS: "-rlgoDzv --no-perms --no-owner --no-group --no-t --delete --exclude='.git/' --exclude='.github/'"
         SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
         SCRIPT_AFTER: |
           # Set proper ownership so Apache can execute files cleanly
