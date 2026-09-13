@@ -1,0 +1,52 @@
+# This workflow will install Composer dependencies and deploy your PHP code 
+# directly to your AWS EC2 Apache web root directory when there is a push to the "main" branch.
+
+name: Deploy PHP App to AWS EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  AWS_REGION: eu-north-1                      
+  EC2_USER: ubuntu                           # Default username for your Ubuntu instance
+  TARGET_DIR: /var/www/html/                 # Standard Apache web root
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'                   
+
+    - name: Install Composer Dependencies
+      run: |
+        if [ -f "composer.json" ]; then
+          composer install --no-dev --optimize-autoloader --no-interaction
+        fi
+
+    - name: Deploy to EC2 via SSH rsync
+      uses: easingthemes/ssh-deploy@v5
+      with:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        REMOTE_HOST: ${{ secrets.EC2_PUBLIC_IP }} # 🔒 Moved to secrets for safety
+        REMOTE_USER: ${{ env.EC2_USER }}
+        TARGET: ${{ env.TARGET_DIR }}
+        ARGS: "-rlgoDzvc --delete"
+        SSH_CMD_ARGS: "-o StrictHostKeyChecking=no" # 🚀 Prevents the connection from hanging
+        SCRIPT_AFTER: |
+          # Set proper ownership so Apache can execute files cleanly
+          sudo chown -R www-data:www-data ${{ env.TARGET_DIR }}
+          sudo chmod -R 755 ${{ env.TARGET_DIR }}
+          # Reload Apache configuration
+          sudo systemctl restart apache2
