@@ -36,7 +36,7 @@ jobs:
         fi
 
     - name: Deploy to EC2 via SSH rsync
-      uses: easingthemes/ssh-deploy@v5
+      uses: easingthemes/ssh-deploy@main  # ✨ Updated version tag to fix the crash
       with:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         REMOTE_HOST: ${{ secrets.EC2_PUBLIC_IP }}
