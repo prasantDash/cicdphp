@@ -39,11 +39,11 @@ jobs:
       uses: easingthemes/ssh-deploy@v5
       with:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-        REMOTE_HOST: ${{ secrets.PUBLIC_EC2_IP }} # 🔒 Moved to secrets for safety
+        REMOTE_HOST: ${{ secrets.EC2_PUBLIC_IP }}
         REMOTE_USER: ${{ env.EC2_USER }}
         TARGET: ${{ env.TARGET_DIR }}
         ARGS: "-rlgoDzvc --delete"
-        SSH_CMD_ARGS: "-o StrictHostKeyChecking=no" # 🚀 Prevents the connection from hanging
+        SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
         SCRIPT_AFTER: |
           # Set proper ownership so Apache can execute files cleanly
           sudo chown -R www-data:www-data ${{ env.TARGET_DIR }}
