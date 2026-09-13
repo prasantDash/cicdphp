@@ -9,7 +9,7 @@ on:
 
 env:
   AWS_REGION: eu-north-1                      
-  EC2_USER: ubuntu                           # Default username for your Ubuntu instance
+  EC2_USER: root                           # Default username for your Ubuntu instance
   TARGET_DIR: /var/www/html/cicdphp          # Standard Apache web root
 
 permissions:
