@@ -45,8 +45,9 @@ jobs:
         ARGS: "-rlgoDzv --no-perms --no-owner --no-group --no-t --delete --exclude='.git/' --exclude='.github/'"
         SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
         SCRIPT_AFTER: |
-          # Set proper ownership so Apache can execute files cleanly
-          sudo chown -R www-data:www-data ${{ env.TARGET_DIR }}
-          sudo chmod -R 755 ${{ env.TARGET_DIR }}
-          # Reload Apache configuration
+          # Keep ownership tied to ubuntu and the apache group so future deployments don't lock out
+          sudo chown -R ubuntu:www-data ${{ env.TARGET_DIR }}
+          sudo chmod -R 775 ${{ env.TARGET_DIR }}
+          # Reload Apache configuration safely
           sudo systemctl restart apache2
+
