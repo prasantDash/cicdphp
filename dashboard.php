@@ -71,7 +71,7 @@ $stats = [
             <header>
                 <div>
                     <h1>Dashboard</h1>
-                    <p class="profile">Welcome back, <?= htmlspecialchars($userName) ?>.</p>
+                    <p class="profile" >Welcome back, <?= htmlspecialchars($userName) ?>.</p>
                 </div>
                 <div class="profile">👤 <?= htmlspecialchars($userName) ?></div>
             </header>
