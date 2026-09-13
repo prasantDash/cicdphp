@@ -42,6 +42,8 @@ $stats = [
         header h1 { margin: 0 0 6px; font-size: 28px; }
         header p { margin: 0; color: #6b7280; }
         .profile { padding: 10px 16px; border-radius: 20px; background: white; box-shadow: 0 2px 8px #0000000d; }
+        .profile::first-letter {
+            text-transform: uppercase;}
         .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
         .card, .panel { padding: 22px; background: white; border-radius: 10px; box-shadow: 0 2px 8px #0000000d; }
         .card h3 { margin: 0 0 12px; color: #6b7280; font-size: 14px; font-weight: normal; }
