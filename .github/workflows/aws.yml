@@ -9,7 +9,7 @@ on:
 
 env:
   AWS_REGION: eu-north-1                      
-  EC2_USER: ubuntu                           # ✨ Restored to ubuntu (root is blocked by AWS by default)
+  EC2_USER: root                           # ✨ Restored to ubuntu (root is blocked by AWS by default)
   TARGET_DIR: /var/www/html/cicdphp          # Standard Apache web root
 
 permissions:
