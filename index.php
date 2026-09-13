@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>User Login</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f4f4f4; }
         .login-form { max-width: 350px; margin: 80px auto; padding: 24px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <form class="login-form" method="post" action="">
-        <h1>login</h1>
+        <h1>User Login</h1>
 
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required autocomplete="username">
