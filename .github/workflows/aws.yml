@@ -46,7 +46,7 @@ jobs:
         SCRIPT_AFTER: |
           # Keep ownership tied to ubuntu and the apache group so future deployments don't lock out
           #sudo chown -R ubuntu:www-data ${{ env.TARGET_DIR }}
-          sudo chown -R ubuntu:www-data ${{ env.TARGET_DIR }} #new line added on 2024-06-19 to fix permission issues with uploaded files
+          sudo chown -R ec2-user:www-data ${{ env.TARGET_DIR }} #new line added on 2024-06-19 to fix permission issues with uploaded files
           #sudo chmod -R 775 ${{ env.TARGET_DIR }}          
           sudo chmod -R 775 ${{ env.TARGET_DIR }} #new line added on 2024-06-19 to fix permission issues with uploaded files
 
