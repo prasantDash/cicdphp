@@ -8,6 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($username === '' || $password === '') {
         $message = 'Please enter both username and password.';
+    }elseif( ($username !== 'prakash' || $password !== 'prakash@1009') ) {
+        $message = 'Invalid username or password.';
+
     } else {
         $_SESSION['username'] = $username;
         $_SESSION['is_logged_in'] = true;
