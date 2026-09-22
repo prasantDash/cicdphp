@@ -10,7 +10,7 @@ on:
 env:
   AWS_REGION: eu-north-1                      
   EC2_USER: ubuntu                           # ✨ Restored to ubuntu (root is blocked by AWS by default)
-  TARGET_DIR: /var/www/html/# Standard Apache web root
+  TARGET_DIR: /var/www/html/                 # Standard Apache web root
 
 permissions:
   contents: read
