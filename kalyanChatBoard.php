@@ -1,5 +1,8 @@
 <?php
 include_once 'loginCheck.php';
+$pageTitle = 'Kalyan Chat Board';
+$userName = $_SESSION['username'] ?? 'Guest';
+
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +10,7 @@ include_once 'loginCheck.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalyan Chat Board</title>
+    <title><?= htmlspecialchars($pageTitle) ?></title>
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f9; color: #1f2937; }
@@ -37,43 +40,20 @@ include_once 'loginCheck.php';
 </head>
 <body>
     <div class="layout">
-        <aside class="sidebar">
-            <h2>My Dashboard</h2>
-            <a class="active" href="dashboard.php">Dashboard</a>
-            <a href="kalyanChatBoard.php">Kalyan Chat Board</a>
-            <a href="#orders">Orders</a>
-            <a href="#settings">Settings</a>
-            <a href="dashboard.php?logout=1">Logout</a>
-        </aside>
+        <?php
+        include 'mainMenu.php';
+        ?>
 
         <main class="content">
             <header>
                 <div>
-                    <h1>Dashboard</h1>
+                    <h1><?= htmlspecialchars($pageTitle) ?></h1>
                     <p class="profile" >Welcome back, <?= htmlspecialchars($userName) ?>.</p>
                 </div>
                 <div class="profile">👤 <?= htmlspecialchars($userName) ?></div>
             </header>
-
-            <section class="stats">
-                <?php foreach ($stats as $stat): ?>
-                    <div class="card">
-                        <h3><?= htmlspecialchars($stat['label']) ?></h3>
-                        <strong><?= htmlspecialchars($stat['value']) ?></strong>
-                    </div>
-                <?php endforeach; ?>
-            </section>
-
             <section class="panel">
-                <h2>Recent Activity</h2>
-                <table>
-                    <thead><tr><th>Activity</th><th>Date</th><th>Status</th></tr></thead>
-                    <tbody>
-                        <tr><td>New user registered</td><td>Today</td><td class="status">Complete</td></tr>
-                        <tr><td>Order #1042 processed</td><td>Yesterday</td><td class="status">Complete</td></tr>
-                        <tr><td>Monthly report generated</td><td>Yesterday</td><td class="status">Complete</td></tr>
-                    </tbody>
-                </table>
+                <h2>Chat Board</h2>                
             </section>
         </main>
     </div>

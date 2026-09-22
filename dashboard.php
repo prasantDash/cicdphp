@@ -1,26 +1,7 @@
 <?php
 include_once 'loginCheck.php';
-if (isset($_GET['logout'])) {
-    $_SESSION = [];
-
-    if (ini_get('session.use_cookies')) {
-        $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-    }
-
-    session_destroy();
-    header('Location: index.php');
-    exit;
-}
-
 $pageTitle = 'Dashboard';
 $userName = $_SESSION['username'] ?? 'Guest';
-$stats = [
-    ['label' => 'Total Users', 'value' => '1,248'],
-    ['label' => 'Orders', 'value' => '356'],
-    ['label' => 'Revenue', 'value' => '$12,480'],
-    ['label' => 'Pending Tasks', 'value' => '18'],
-];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,19 +38,14 @@ $stats = [
 </head>
 <body>
     <div class="layout">
-        <aside class="sidebar">
-            <h2>My Dashboard</h2>
-            <a class="active" href="dashboard.php">Dashboard</a>
-            <a href="kalyanChatBoard.php">Kalyan Chat Board</a>
-            <a href="#orders">Orders</a>
-            <a href="#settings">Settings</a>
-            <a href="dashboard.php?logout=1">Logout</a>
-        </aside>
+        <?php
+        include 'mainMenu.php';
+        ?>
 
         <main class="content">
             <header>
                 <div>
-                    <h1>Dashboard</h1>
+                    <h1><?= htmlspecialchars($pageTitle) ?></h1>
                     <p class="profile" >Welcome back, <?= htmlspecialchars($userName) ?>.</p>
                 </div>
                 <div class="profile">👤 <?= htmlspecialchars($userName) ?></div>
