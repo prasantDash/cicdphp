@@ -63,6 +63,9 @@ $userName = $_SESSION['username'] ?? 'Guest';
                 width: 100%;             /* Allows the table to expand naturally */
                 max-width: none;         /* Prevents other styles from clipping the layout */
             }
+            @media (max-width: 800px) {
+                .content { padding: 5px 0px; }
+            }
 
         </style>
     </head>
