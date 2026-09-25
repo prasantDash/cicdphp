@@ -65,6 +65,9 @@ $userName = $_SESSION['username'] ?? 'Guest';
             }
             @media (max-width: 800px) {
                 .content { padding: 5px 0px; }
+                .card, .panel {
+                    padding: 0px;  /* Reduces padding for smaller screens */
+                }
             }
 
         </style>
