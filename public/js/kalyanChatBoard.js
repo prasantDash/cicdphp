@@ -28,7 +28,7 @@ text.textContent = value ?? '';
 return text;
 }
 
-fetch('kalyanData.json')
+fetch('./kalyanData.json')
 .then(response => {
     if (!response.ok) throw new Error(`Request failed: ${response.status}`);
     return response.json();
