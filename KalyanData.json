@@ -1,0 +1,157 @@
+﻿[
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "460",
+        "jodi":  "04",
+        "close":  "248",
+        "result":  "460-04-248",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-09",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "347",
+        "jodi":  "40",
+        "close":  "235",
+        "result":  "347-40-235",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-10",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "468",
+        "jodi":  "89",
+        "close":  "379",
+        "result":  "468-89-379",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-11",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "147",
+        "jodi":  "23",
+        "close":  "779",
+        "result":  "147-23-779",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-12",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "227",
+        "jodi":  "18",
+        "close":  "279",
+        "result":  "227-18-279",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-13",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "570",
+        "jodi":  "29",
+        "close":  "126",
+        "result":  "570-29-126",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-14",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "367",
+        "jodi":  "63",
+        "close":  "247",
+        "result":  "367-63-247",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-15",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "269",
+        "jodi":  "78",
+        "close":  "477",
+        "result":  "269-78-477",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-16",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "489",
+        "jodi":  "12",
+        "close":  "147",
+        "result":  "489-12-147",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-17",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "122",
+        "jodi":  "54",
+        "close":  "770",
+        "result":  "122-54-770",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-18",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "678",
+        "jodi":  "10",
+        "close":  "460",
+        "result":  "678-10-460",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-20",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "279",
+        "jodi":  "85",
+        "close":  "267",
+        "result":  "279-85-267",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-19",
+        "fetch_datetime":  null
+    },    
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "678",
+        "jodi":  "10",
+        "close":  "460",
+        "result":  "678-10-460",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-21",
+        "fetch_datetime":  null
+    },
+    {
+        "name":  "KALYAN MORNING",
+        "open":  "279",
+        "jodi":  "85",
+        "close":  "267",
+        "result":  "279-85-267",
+        "open_time":  "11:40 AM",
+        "close_time":  "12:40 AM",
+        "result_date":  "2026-09-22",
+        "fetch_datetime":  null
+    }
+    
+]
