@@ -36,6 +36,22 @@ $userName = $_SESSION['username'] ?? 'Guest';
             .status { color: #15803d; font-weight: bold; }
             @media (max-width: 800px) { .sidebar { width: 180px; } .stats { grid-template-columns: repeat(2, 1fr); } }
             @media (max-width: 550px) { .layout { display: block; } .sidebar { width: 100%; } .stats { grid-template-columns: 1fr; } header { align-items: flex-start; gap: 12px; flex-direction: column; } }
+            .item-container { display: flex; flex-direction: row; justify-content: space-around; }
+            .item-container div { margin: 0 5px; }
+            .open-class { word-break: break-all; width: 10px; text-align: center; }
+            .item-jodi { word-break: break-all; text-align: center; }
+            .table-header { background-color: #f3f4f6; text-align: center; font-weight: bold; }
+            .red-circle-badge {
+                background-color: #ff5600;  /* Pure red background */
+                color: #ffffff;             /* White text color for readability */
+                display: inline-flex;       /* Enables flex centering inside the circle */
+                align-items: center;        /* Centers text vertically */
+                justify-content: center;    /* Centers text horizontally */
+                width: 30px;                /* Equal width and height create a perfect circle */
+                height: 30px;
+                border-radius: 50%;         /* Makes the square background round */
+                font-size: 15px;            /* Adjust font size as needed */
+            }
         </style>
     </head>
     <body>
@@ -58,14 +74,14 @@ $userName = $_SESSION['username'] ?? 'Guest';
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Monday</th>
-                                    <th>Tuesday</th>
-                                    <th>Wednesday</th>
-                                    <th>Thursday</th>
-                                    <th>Friday</th>
-                                    <th>Saturday</th>
-                                    <th>Sunday</th>
+                                    <th class="table-header">Date</th>
+                                    <th class="table-header">Monday</th>
+                                    <th class="table-header">Tuesday</th>
+                                    <th class="table-header">Wednesday</th>
+                                    <th class="table-header">Thursday</th>
+                                    <th class="table-header">Friday</th>
+                                    <th class="table-header">Saturday</th>
+                                    <th class="table-header">Sunday</th>
                                 </tr>
                             </thead>
                             <tbody id="chatTableBody">
