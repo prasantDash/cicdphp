@@ -109,7 +109,7 @@ fetch('./kalyanData.json')
             if(item.fromdate && item.todate) {
                 cell.innerHTML = `${item.fromdate} <br><br> ${item.todate}`;
             }else{
-                cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div class="red-circle-badge"><b> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div class="red-circle-badge" title="${item.dayName} and ${item.result_date}"><b> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
             }
             
             chunkContainer.appendChild(cell);
