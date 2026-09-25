@@ -116,8 +116,6 @@ fetch('./kalyanData.json')
         });
         table.appendChild(chunkContainer);
     });
-
-    //chatData.replaceChildren(renderValue(data));
 })
 .catch(error => {
     chatData.textContent = `Unable to load chat data: ${error.message}`;

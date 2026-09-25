@@ -52,6 +52,18 @@ $userName = $_SESSION['username'] ?? 'Guest';
                 border-radius: 50%;         /* Makes the square background round */
                 font-size: 15px;            /* Adjust font size as needed */
             }
+            .table-container {
+                width: 100%;             /* Ensures the container takes up the full screen width */
+                overflow-x: auto;        /* Adds a horizontal scrollbar only when the table is wider than the screen */
+                overflow-y: hidden;      /* Prevents unnecessary vertical scrolling blocks */
+                -webkit-overflow-scrolling: touch; /* Ensures smooth, kinetic scrolling on iOS devices */
+            }
+
+            table {
+                width: 100%;             /* Allows the table to expand naturally */
+                max-width: none;         /* Prevents other styles from clipping the layout */
+            }
+
         </style>
     </head>
     <body>
@@ -70,7 +82,7 @@ $userName = $_SESSION['username'] ?? 'Guest';
                 </header>
                 <section class="panel">
                     <h2>Chat Board</h2>
-                    <div id="chatData">
+                    <div id="chatData" class="table-container">
                         <table>
                             <thead>
                                 <tr>
