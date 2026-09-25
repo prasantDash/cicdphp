@@ -75,7 +75,6 @@ $userName = $_SESSION['username'] ?? 'Guest';
                 </section>
             </main>
         </div>
-    </body>
-    <script src="src/js/KalyanChatBoard.js">
-    </script>
+        <script src="./public/js/kalyanChatBoard.js"></script>
+    </body>    
 </html>
