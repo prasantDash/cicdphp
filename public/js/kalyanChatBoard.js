@@ -34,35 +34,40 @@ fetch('./kalyanData.json')
     return response.json();
 })
 .then(data => {
-     if (Array.isArray(data)) {
-        
-        data.sort((a, b) => {
-            const getDateTime = item => {
-                if (!item || typeof item !== 'object') return 0;
-                const date = item.result_date ?? item.Date ?? '';
-                const time = item.close_time ?? item.Time ?? '';
-                return Date.parse(`${date} ${time}`) || 0;
-            };
-            return getDateTime(a) - getDateTime(b);
-        });
-    }
+    console.log('Fetched data:', data, 'items');
+    
     const sortedData = data.map(item => {
-        const date = new Date(item.result_date ?? item.Date ?? '');
-        const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-        return { ...item, dayName };
-    });
+        const dateValue = item.result_date ?? item.Date ?? '';
+        // JavaScript does not reliably parse dates in DD/MM/YYYY format.
+        const match = String(dateValue).match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        const date = match
+            ? new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]))
+            : new Date(dateValue);
+        const dayName = Number.isNaN(date.getTime())
+            ? ''
+            : date.toLocaleDateString('en-US', { weekday: 'long' });
+        return { item, timestamp: date.getTime(), dayName };
+    }).sort((a, b) => {
+        const aInvalid = Number.isNaN(a.timestamp);
+        const bInvalid = Number.isNaN(b.timestamp);
+        if (aInvalid || bInvalid) return aInvalid === bInvalid ? 0 : aInvalid ? 1 : -1;
+        return a.timestamp - b.timestamp;
+    }).map(({ item, dayName }) => ({ ...item, dayName }));
+
+    console.log('Sorted data:', sortedData);
+   // return false; // Return false to indicate that the data has been processed
 
     const chunks = [];
     let currentChunk = [];
     sortedData.forEach(item => {
         currentChunk.push(item);
-        if (String(item.dayName).toLowerCase() === 'sunday') {
+        if (String(item.dayName).toLowerCase() === 'saturday') {
             chunks.push(currentChunk);
             currentChunk = [];
         }
     });
     if (currentChunk.length > 0) chunks.push(currentChunk);
-    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"];
+    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     chunks.forEach((chunk, index) => {
         chunk.unshift({
             fromdate: chunk[0].result_date ?? chunk[0].Date ?? '',
@@ -71,7 +76,7 @@ fetch('./kalyanData.json')
         daysOfWeek.forEach(day => {
             if (!chunk.some(item => String(item.dayName).toLowerCase() === day.toLowerCase())) {
                 const missingItem = {
-                    name: "KALYAN MORNING",
+                    name: "KALYAN",
                     open: "***",
                     jodi: "**",
                     close: "***",
@@ -104,7 +109,7 @@ fetch('./kalyanData.json')
     chunks.forEach((chunk, index) => {
         const chunkContainer = document.createElement('tr');
         chunk.forEach(item => {
-            console.log('Rendering item:', item);
+            //console.log('Rendering item:', item);
             const cell = document.createElement('td');
             if(item.fromdate && item.todate) {
                 cell.innerHTML = `${item.fromdate} <br><br> ${item.todate}`;

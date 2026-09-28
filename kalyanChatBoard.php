@@ -42,8 +42,8 @@ $userName = $_SESSION['username'] ?? 'Guest';
             .item-jodi { word-break: break-all; text-align: center; }
             .table-header { background-color: #f3f4f6; text-align: center; font-weight: bold; }
             .red-circle-badge {
-                background-color: #ff5600;  /* Pure red background */
-                color: #ffffff;             /* White text color for readability */
+                //background-color: #ff5600;  /* Pure red background */
+                //color: #ffffff;             /* White text color for readability */
                 display: inline-flex;       /* Enables flex centering inside the circle */
                 align-items: center;        /* Centers text vertically */
                 justify-content: center;    /* Centers text horizontally */
@@ -69,6 +69,10 @@ $userName = $_SESSION['username'] ?? 'Guest';
                     padding: 0px;  /* Reduces padding for smaller screens */
                 }
             }
+            .mondayInput, .tuesdayInput, .wednesdayInput, .thursdayInput, .fridayInput, .saturdayInput {
+                margin-bottom: 5px; /* Adds space between the input fields */
+                width: 130px; /* Sets a fixed width for the input fields */
+            }
 
         </style>
     </head>
@@ -87,24 +91,71 @@ $userName = $_SESSION['username'] ?? 'Guest';
                     <div class="profile">👤 <?= htmlspecialchars($userName) ?></div>
                 </header>
                 <section class="panel">
-                    <h2>Chat Board</h2>
+                    <h3 style="margin: 0;">Chat Board</h3>
                     <div id="chatData" class="table-container">
+                        <form>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center; padding: 12px; color: #6b7280;">                                            
+                                            <input type="text" placeholder="Open Monday" name="MondayOpen" class="mondayInput"><br>
+                                            <input type="text" placeholder="Close Monday" name="MondayClose" class="mondayInput"><br>
+                                            <input type="text" placeholder="Jodi Monday" name="MondayJodi" class="mondayInput">                                         
+                                        </td>
+                                        <td style="text-align: center; padding: 12px; color: #6b7280;">
+                                            <input type="text" placeholder="Open Tuesday" name="TuesdayOpen" class="tuesdayInput"><br>
+                                            <input type="text" placeholder="Close Tuesday" name="TuesdayClose" class="tuesdayInput"><br>
+                                            <input type="text" placeholder="Jodi Tuesday" name="TuesdayJodi" class="tuesdayInput">
+                                        </td>
+                                        <td style="text-align: center; padding: 12px; color: #6b7280;">
+                                            <input type="text" placeholder="Open Wednesday" name="WednesdayOpen" class="wednesdayInput"><br>
+                                            <input type="text" placeholder="Close Wednesday" name="WednesdayClose" class="wednesdayInput"><br>
+                                            <input type="text" placeholder="Jodi Wednesday" name="WednesdayJodi" class="wednesdayInput">
+                                        </td>
+                                        <td style="text-align: center; padding: 12px; color: #6b7280;">
+                                            <input type="text" placeholder="Open Thursday" name="ThursdayOpen" class="thursdayInput"><br>
+                                            <input type="text" placeholder="Close Thursday" name="ThursdayClose" class="thursdayInput"><br>
+                                            <input type="text" placeholder="Jodi Thursday" name="ThursdayJodi" class="thursdayInput">
+                                        </td>
+                                        <td  style="text-align: center; padding: 12px; color: #6b7280;">
+                                            <input type="text" placeholder="Open Friday" name="FridayOpen" class="fridayInput"><br>
+                                            <input type="text" placeholder="Close Friday" name="FridayClose" class="fridayInput"><br>
+                                            <input type="text" placeholder="Jodi Friday" name="FridayJodi" class="fridayInput">
+                                        </td>
+                                        <td  style="text-align: center; padding: 12px; color: #6b7280;">
+                                            <input type="text" placeholder="Open Saturday" name="SaturdayOpen" class="saturdayInput"><br>
+                                            <input type="text" placeholder="Close Saturday" name="SaturdayClose" class="saturdayInput"><br>
+                                            <input type="text" placeholder="Jodi Saturday" name="SaturdayJodi" class="saturdayInput">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
                         <table>
                             <thead>
                                 <tr>
                                     <th class="table-header">Date</th>
-                                    <th class="table-header">Monday</th>
+                                    <th class="table-header">
+                                        <div>
+                                        <div>Monday</div>
+                                        <div
+                                    </th>
                                     <th class="table-header">Tuesday</th>
                                     <th class="table-header">Wednesday</th>
                                     <th class="table-header">Thursday</th>
                                     <th class="table-header">Friday</th>
                                     <th class="table-header">Saturday</th>
-                                    <th class="table-header">Sunday</th>
                                 </tr>
                             </thead>
                             <tbody id="chatTableBody">
                                 <!-- Chat messages will be dynamically inserted here -->
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7" style="text-align: center; padding: 12px; color: #6b7280;">End of Chat Board</td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </section>
             </main>
