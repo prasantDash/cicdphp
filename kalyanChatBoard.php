@@ -73,6 +73,10 @@ $userName = $_SESSION['username'] ?? 'Guest';
                 margin-bottom: 5px; /* Adds space between the input fields */
                 width: 130px; /* Sets a fixed width for the input fields */
             }
+            .chart-board-header{
+                display: flex;
+                justify-content: space-between;
+            }
 
         </style>
     </head>
@@ -91,55 +95,64 @@ $userName = $_SESSION['username'] ?? 'Guest';
                     <div class="profile">👤 <?= htmlspecialchars($userName) ?></div>
                 </header>
                 <section class="panel">
-                    <h3 style="margin: 0;">Chat Board</h3>
+                    <div class="chart-board-header">
+                        <div>
+                            <h3 style="margin: 0;">Chat Board</h3>
+                        </div>
+                        <div>
+                            <button type="button" id="searchButton">Search</button> 
+                        </div>
+                    </div>
+                    
                     <div id="chatData" class="table-container">
-                        <form>
+                        <form id="search-chat-Form">
                             <table>
                                 <tbody>
                                     <tr>
                                         <td style="text-align: center; padding: 12px; color: #6b7280;">                                            
-                                            <input type="text" placeholder="Open Monday" name="MondayOpen" class="mondayInput"><br>
-                                            <input type="text" placeholder="Close Monday" name="MondayClose" class="mondayInput"><br>
-                                            <input type="text" placeholder="Jodi Monday" name="MondayJodi" class="mondayInput">                                         
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" placeholder="Open Monday" name="Monday-open" class="mondayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" max="99" placeholder="Jodi Monday" name="Monday-jodi" class="mondayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Close Monday" name="Monday-close" class="mondayInput">                                                                                
                                         </td>
                                         <td style="text-align: center; padding: 12px; color: #6b7280;">
-                                            <input type="text" placeholder="Open Tuesday" name="TuesdayOpen" class="tuesdayInput"><br>
-                                            <input type="text" placeholder="Close Tuesday" name="TuesdayClose" class="tuesdayInput"><br>
-                                            <input type="text" placeholder="Jodi Tuesday" name="TuesdayJodi" class="tuesdayInput">
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Open Tuesday" name="Tuesday-open" class="tuesdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" max="99" placeholder="Jodi Tuesday" name="Tuesday-jodi" class="tuesdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Close Tuesday" name="Tuesday-close" class="tuesdayInput">
+                                            
                                         </td>
                                         <td style="text-align: center; padding: 12px; color: #6b7280;">
-                                            <input type="text" placeholder="Open Wednesday" name="WednesdayOpen" class="wednesdayInput"><br>
-                                            <input type="text" placeholder="Close Wednesday" name="WednesdayClose" class="wednesdayInput"><br>
-                                            <input type="text" placeholder="Jodi Wednesday" name="WednesdayJodi" class="wednesdayInput">
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Open Wednesday" name="Wednesday-open" class="wednesdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" max="99" placeholder="Jodi Wednesday" name="Wednesday-jodi" class="wednesdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Close Wednesday" name="Wednesday-close" class="wednesdayInput">
+                                            
                                         </td>
                                         <td style="text-align: center; padding: 12px; color: #6b7280;">
-                                            <input type="text" placeholder="Open Thursday" name="ThursdayOpen" class="thursdayInput"><br>
-                                            <input type="text" placeholder="Close Thursday" name="ThursdayClose" class="thursdayInput"><br>
-                                            <input type="text" placeholder="Jodi Thursday" name="ThursdayJodi" class="thursdayInput">
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Open Thursday" name="Thursday-open" class="thursdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" max="99" placeholder="Jodi Thursday" name="Thursday-jodi" class="thursdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Close Thursday" name="Thursday-close" class="thursdayInput">
+                                            
                                         </td>
                                         <td  style="text-align: center; padding: 12px; color: #6b7280;">
-                                            <input type="text" placeholder="Open Friday" name="FridayOpen" class="fridayInput"><br>
-                                            <input type="text" placeholder="Close Friday" name="FridayClose" class="fridayInput"><br>
-                                            <input type="text" placeholder="Jodi Friday" name="FridayJodi" class="fridayInput">
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Open Friday" name="Friday-open" class="fridayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" max="99" placeholder="Jodi Friday" name="Friday-jodi" class="fridayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Close Friday" name="Friday-close" class="fridayInput">
+                                            
                                         </td>
                                         <td  style="text-align: center; padding: 12px; color: #6b7280;">
-                                            <input type="text" placeholder="Open Saturday" name="SaturdayOpen" class="saturdayInput"><br>
-                                            <input type="text" placeholder="Close Saturday" name="SaturdayClose" class="saturdayInput"><br>
-                                            <input type="text" placeholder="Jodi Saturday" name="SaturdayJodi" class="saturdayInput">
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Open Saturday" name="Saturday-open" class="saturdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" max="99" placeholder="Jodi Saturday" name="Saturday-jodi" class="saturdayInput"><br>
+                                            <input type="number" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" max="999" placeholder="Close Saturday" name="Saturday-close" class="saturdayInput">                                            
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </form>
-                        <table>
+                        <div id="search-result"></div>
+                        <table id="mainChartBoard">
                             <thead>
                                 <tr>
                                     <th class="table-header">Date</th>
-                                    <th class="table-header">
-                                        <div>
-                                        <div>Monday</div>
-                                        <div
-                                    </th>
+                                    <th class="table-header">Monday</th>
                                     <th class="table-header">Tuesday</th>
                                     <th class="table-header">Wednesday</th>
                                     <th class="table-header">Thursday</th>
