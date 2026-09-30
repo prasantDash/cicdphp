@@ -238,7 +238,13 @@ searchButton.addEventListener('click', () => {
             // 3. Assign the value to the specific metric (only if you want to store it)
             targetMetrics[day][metric] = Number(value);
         });
-
+        //Function to search days
+        const searchedDays = Object.keys(targetMetrics).filter(day => {
+            const config = targetMetrics[day];
+            return (config.open !== 0 && config.open !== "") || 
+                (config.jodi !== 0 && config.jodi !== "") || 
+                (config.close !== 0 && config.close !== "");
+        });
         //Conditional check
         let searchFlag = false;
         let dayToBeTaken = 11;
@@ -248,35 +254,65 @@ searchButton.addEventListener('click', () => {
         let dynamicArray = [];
         chunks.forEach((chunk) => {
             if(searchFlag === false){
-                chunk.forEach(item => {                
-                                        
-                    // 1. Check if the current day configuration exists
-                    const dayConfig = targetMetrics[item.dayName];
+                chunk.forEach(item => {
+                    // 2. Track if ALL searched days match their targets within this chunk
+                    let allDaysMatched = false;
 
-                    let isMatch = false;
-
-                    if (dayConfig && availableDays.includes(item.dayName)) {
-                        // 2. Identify which metrics are actually provided in the targets (not 0, null, or empty string)
-                        const checks = [];
-                        
-                        if (dayConfig.open !== 0 && dayConfig.open !== "")   checks.push(Number(item.open)  === Number(dayConfig.open));
-                        if (dayConfig.jodi !== 0 && dayConfig.jodi !== "")   checks.push(Number(item.jodi)  === Number(dayConfig.jodi));
-                        if (dayConfig.close !== 0 && dayConfig.close !== "") checks.push(Number(item.close) === Number(dayConfig.close));
-                        
-                        // 3. It's a match only if there's at least one active metric AND all active metrics match perfectly
-                        if (checks.length > 0 && checks.every(result => result === true)) {
-                            isMatch = true;
-                        }
+                    if (searchedDays.length > 0) {
+                        allDaysMatched = searchedDays.every(dayName => {
+                            // Find the specific day's item inside the current weekly chunk
+                            const dayItem = chunk.find(item => item.dayName === dayName);
+                            
+                            // If the day data doesn't exist in the chunk, this day fails the match
+                            if (!dayItem) return false;
+                            
+                            const dayConfig = targetMetrics[dayName];
+                            const checks = [];
+                            
+                            if (dayConfig.open !== 0 && dayConfig.open !== "") {
+                                checks.push(Number(dayItem.open) === Number(dayConfig.open));
+                            }
+                            if (dayConfig.jodi !== 0 && dayConfig.jodi !== "") {
+                                checks.push(Number(dayItem.jodi) === Number(dayConfig.jodi));
+                            }
+                            if (dayConfig.close !== 0 && dayConfig.close !== "") {
+                                checks.push(Number(dayItem.close) === Number(dayConfig.close));
+                            }
+                            
+                            // This specific day matches only if all entered fields match perfectly
+                            return checks.length > 0 && checks.every(result => result === true);
+                        });
                     }
 
-                    if (isMatch) {
+                    // 3. If every single searched day was found and matched perfectly in this week chunk
+                    if (allDaysMatched) {
                         searchFlag = true;
                         dataCount = 1;
+                        
+                        // Pro-Tip: This is where you write your code to push the matching 'chunk' 
+                        // to your visible array so the table shows the row with Monday 51 and Tuesday 29!
                     }
-
-
-
-
+                                         
+                    // // 1. Check if the current day configuration exists
+                    // const dayConfig = targetMetrics[item.dayName];
+                    // let isMatch = false;
+                    // if (dayConfig && availableDays.includes(item.dayName)) {
+                    //     // 2. Identify which metrics are actually provided in the targets (not 0, null, or empty string)
+                    //     const checks = [];
+                        
+                    //     if (dayConfig.open !== 0 && dayConfig.open !== "")   checks.push(Number(item.open)  === Number(dayConfig.open));
+                    //     if (dayConfig.jodi !== 0 && dayConfig.jodi !== "")   checks.push(Number(item.jodi)  === Number(dayConfig.jodi));
+                    //     if (dayConfig.close !== 0 && dayConfig.close !== "") checks.push(Number(item.close) === Number(dayConfig.close));
+                        
+                    //     // 3. It's a match only if there's at least one active metric AND all active metrics match perfectly
+                    //     if (checks.length > 0 && checks.every(result => result === true)) {
+                    //         isMatch = true;
+                    //     }
+                    // }
+                    // if (isMatch) {
+                    //     searchFlag = true;
+                    //     dataCount = 1;
+                    // }
                 });
             }
             
