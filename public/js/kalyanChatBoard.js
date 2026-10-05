@@ -1,4 +1,14 @@
+const isMobile = window.matchMedia("(max-width: 768px)").matches || 
+                 /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 const chatData = document.getElementById('chatData');
+
+//Function to check if a number has duplicate digits
+function hasDuplicateDigits(number) {
+  const numStr = Math.abs(number).toString();
+  return numStr.length !== new Set(numStr).size;
+}
+
 
 function renderValue(value) {
 if (Array.isArray(value)) {
@@ -110,9 +120,14 @@ fetch('./kalyanData.json')
             //console.log('Rendering item:', item);
             const cell = document.createElement('td');
             if(item.fromdate && item.todate) {
-                cell.innerHTML = `${item.fromdate} <br><br> ${item.todate}`;
+                cell.innerHTML = `<div style="text-align: center">${item.fromdate} <br> to <br> ${item.todate}</div>`;
             }else{
-                cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div class="red-circle-badge" title="${item.dayName} and ${item.result_date}"><b> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                if(hasDuplicateDigits(item.jodi)){
+                    cell.innerHTML = `<div class="item-container" style="color: #dc2626;"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div title="${item.dayName} and ${item.result_date}"><b style="font-size:14px; color: #dc2626;"> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                }else{
+                    cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div title="${item.dayName} and ${item.result_date}"><b style="font-size:14px"> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                }
+                
             }
             
             chunkContainer.appendChild(cell);
@@ -134,6 +149,8 @@ function chunkArray(arr, size) {
 //Search button functionality
 const searchButton = document.getElementById('searchButton');
 searchButton.addEventListener('click', () => {
+    const mainDataTable = document.getElementById("mainChartBoard");
+    mainDataTable.style.display = "none"; // Hide the main table when search is performed
     const fromDateInput = document.getElementById('search-chat-Form');
     const formData = new FormData(fromDateInput);
     const formDataObject = Object.fromEntries(formData.entries());
@@ -194,12 +211,12 @@ searchButton.addEventListener('click', () => {
                 if (!chunk.some(item => String(item.dayName).toLowerCase() === day.toLowerCase())) {
                     const missingItem = {
                         name: "KALYAN",
-                        open: "***",
-                        jodi: "**",
-                        close: "***",
-                        result: "***-**-***",
-                        open_time: "**",
-                        close_time: "**",
+                        open: "<div>*</>br*</br>*</div>",
+                        jodi: "<div>**</div>",
+                        close: "<div>***</div>",
+                        result: "<div>***-**-***</div>",
+                        open_time: "<div>**</div>",
+                        close_time: "<div>**</div>",
                         result_date: "**",
                         fetch_datetime: null,
                         dayName: day
@@ -293,26 +310,7 @@ searchButton.addEventListener('click', () => {
                         // to your visible array so the table shows the row with Monday 51 and Tuesday 29!
                     }
                                          
-                    // // 1. Check if the current day configuration exists
-                    // const dayConfig = targetMetrics[item.dayName];
-                    // let isMatch = false;
-                    // if (dayConfig && availableDays.includes(item.dayName)) {
-                    //     // 2. Identify which metrics are actually provided in the targets (not 0, null, or empty string)
-                    //     const checks = [];
-                        
-                    //     if (dayConfig.open !== 0 && dayConfig.open !== "")   checks.push(Number(item.open)  === Number(dayConfig.open));
-                    //     if (dayConfig.jodi !== 0 && dayConfig.jodi !== "")   checks.push(Number(item.jodi)  === Number(dayConfig.jodi));
-                    //     if (dayConfig.close !== 0 && dayConfig.close !== "") checks.push(Number(item.close) === Number(dayConfig.close));
-                        
-                    //     // 3. It's a match only if there's at least one active metric AND all active metrics match perfectly
-                    //     if (checks.length > 0 && checks.every(result => result === true)) {
-                    //         isMatch = true;
-                    //     }
-                    // }
-                    // if (isMatch) {
-                    //     searchFlag = true;
-                    //     dataCount = 1;
-                    // }
+                    
                 });
             }
             
@@ -327,39 +325,36 @@ searchButton.addEventListener('click', () => {
             }
             dataCount++
         });
+        
         //console.log(searchData," Search data");
         const searchResults = chunkArray(searchData, dayToBeTaken);
-        console.log(searchResults, "final result");
         const parentSearchContainer = document.getElementById('search-result');
         parentSearchContainer.innerHTML = '';
         searchResults.forEach((searchResult)=>{            
             const createTable = document.createElement("table");
-            // Adds a solid 1px gray border to the table
-            createTable.style.border = "2px solid #f40b0b"; 
-            // Collapses cell borders so they don't look doubled
-            createTable.style.borderCollapse = "collapse";
+            createTable.setAttribute("border", "1");
             const createTableHead = document.createElement("thead");
             const createTableHeadTr = document.createElement("tr");
             const createTableHeaderTrCellDate = document.createElement("th");
-            createTableHeaderTrCellDate.textContent = "Date";
+            createTableHeaderTrCellDate.textContent = (isMobile) ? "Date" : "Date";
             createTableHeaderTrCellDate.classList.add("table-header");
             const createTableHeaderTrCellMonday = document.createElement("th");
-            createTableHeaderTrCellMonday.textContent = "Monday";
+            createTableHeaderTrCellMonday.textContent = (isMobile) ? "Mon" : "Monday";
             createTableHeaderTrCellMonday.classList.add("table-header");
             const createTableHeaderTrCellTuesday = document.createElement("th");
-            createTableHeaderTrCellTuesday.textContent = "Tuesday";
+            createTableHeaderTrCellTuesday.textContent = (isMobile) ? "Tue" : "Tuesday";
             createTableHeaderTrCellTuesday.classList.add("table-header");
             const createTableHeaderTrCellWednesday = document.createElement("th");
-            createTableHeaderTrCellWednesday.textContent = "Wednesday";
+            createTableHeaderTrCellWednesday.textContent = (isMobile) ? "Wed" : "Wednesday";
             createTableHeaderTrCellWednesday.classList.add("table-header");
             const createTableHeaderTrCellThursday = document.createElement("th");
-            createTableHeaderTrCellThursday.textContent = "Thursday";
+            createTableHeaderTrCellThursday.textContent = (isMobile) ? "Thu" : "Thursday";
             createTableHeaderTrCellThursday.classList.add("table-header");
             const createTableHeaderTrCellFriday = document.createElement("th");
-            createTableHeaderTrCellFriday.textContent = "Friday";
+            createTableHeaderTrCellFriday.textContent = (isMobile) ? "Fri" : "Friday";
             createTableHeaderTrCellFriday.classList.add("table-header");
             const createTableHeaderTrCellSaterday = document.createElement("th");
-            createTableHeaderTrCellSaterday.textContent = "Saturday";
+            createTableHeaderTrCellSaterday.textContent = (isMobile) ? "Sat" : "Saturday";
             createTableHeaderTrCellSaterday.classList.add("table-header");
             //Create table body tbody
             const createTableBody = document.createElement("tbody");
@@ -369,9 +364,13 @@ searchButton.addEventListener('click', () => {
                 result.forEach((item) => {
                     const cell = document.createElement('td');
                     if(item.fromdate && item.todate) {
-                        cell.innerHTML = `${item.fromdate} <br><br> ${item.todate}`;
+                        cell.innerHTML = `<div style="text-align: center;">${item.fromdate} <br>to<br> ${item.todate}</div>`;
                     }else{
-                        cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div class="red-circle-badge" title="${item.dayName} and ${item.result_date}"><b> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                        if(hasDuplicateDigits(item.jodi)){
+                            cell.innerHTML = `<div class="item-container" style="color: #dc2626;"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div title="${item.dayName} and ${item.result_date}"><b style="font-size:14px; color: #dc2626;"> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                        }else{
+                            cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div title="${item.dayName} and ${item.result_date}"><b style="font-size:14px"> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                        }
                     }
                     
                     createTableRow.appendChild(cell);
@@ -395,28 +394,11 @@ searchButton.addEventListener('click', () => {
             
         });
         const brTag = document.createElement("br");
-        parentSearchContainer.appendChild(brTag)
-
-        
-        
-
-        
-        // const table = document.getElementById("chatTableBody");
-        // chunks.forEach((chunk, index) => {
-        //     const chunkContainer = document.createElement('tr');
-        //     chunk.forEach(item => {
-        //         //console.log('Rendering item:', item);
-        //         const cell = document.createElement('td');
-        //         if(item.fromdate && item.todate) {
-        //             cell.innerHTML = `${item.fromdate} <br><br> ${item.todate}`;
-        //         }else{
-        //             cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div class="red-circle-badge" title="${item.dayName} and ${item.result_date}"><b> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
-        //         }
-                
-        //         chunkContainer.appendChild(cell);
-        //     });
-        //     table.appendChild(chunkContainer);
-        // });
+        parentSearchContainer.appendChild(brTag);
+        if(searchData.length == 0){
+            parentSearchContainer.innerHTML = '<p>No data found for the given search Number.</p>';
+            return;
+        }
     })
     .catch(error => {
         chatData.textContent = `Unable to load chat data: ${error.message}`;
