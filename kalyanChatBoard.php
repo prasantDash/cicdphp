@@ -240,6 +240,10 @@ function isMobile() {
                             <h3 style="margin: 0;">Search Chat</h3>
                         </div>
                         <div>
+                            <label for="dayCount">Day Count:</label>
+                            <input type="number" placeholder="Enter day count" id="dayCount"/>
+                        </div>
+                        <div>
                             <button type="button" id="searchButton">Search</button> 
                         </div>
                     </div>

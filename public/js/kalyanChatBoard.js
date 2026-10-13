@@ -264,7 +264,8 @@ searchButton.addEventListener('click', () => {
         });
         //Conditional check
         let searchFlag = false;
-        let dayToBeTaken = 12;
+        let dayInput = document.getElementById('dayCount').value;
+        let dayToBeTaken = Number((dayInput) || 1); // Default to 1 if input is empty or invalid
         let dataCount = 1;
 
         let searchData = [];
