@@ -264,7 +264,7 @@ searchButton.addEventListener('click', () => {
         });
         //Conditional check
         let searchFlag = false;
-        let dayToBeTaken = 11;
+        let dayToBeTaken = 12;
         let dataCount = 1;
 
         let searchData = [];
@@ -368,6 +368,7 @@ searchButton.addEventListener('click', () => {
                     }else{
                         if(hasDuplicateDigits(item.jodi)){
                             cell.innerHTML = `<div class="item-container" style="color: #dc2626;"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div title="${item.dayName} and ${item.result_date}"><b style="font-size:14px; color: #dc2626;"> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
+                            
                         }else{
                             cell.innerHTML = `<div class="item-container"><div class="open-class">${item.open}</div><div style="display: flex; align-items: center;"><div title="${item.dayName} and ${item.result_date}"><b style="font-size:14px"> ${item.jodi} </b></div></div> <div class="open-class">${item.close}</div></div>`;
                         }
