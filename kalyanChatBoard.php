@@ -244,6 +244,9 @@ function isMobile() {
                             <input type="number" placeholder="Enter day count" id="dayCount"/>
                         </div>
                         <div>
+                            <button type="button" id="addNewButton" onclick="document.getElementById('my-modal').showModal()">Add New</button> 
+                        </div>
+                        <div>
                             <button type="button" id="searchButton">Search</button> 
                         </div>
                     </div>
@@ -313,6 +316,33 @@ function isMobile() {
                 </section>
             </main>
         </div>
+        <!-- The Modal -->
+        <dialog id="my-modal">
+            <p>Add new Record</p>
+            <form id="chatForm" >
+                <table>
+                    <tr>
+                        <td><label for="date">Date:</label></td>
+                        <td><input type="date" id="date" name="date" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="open">Open:</label></td>
+                        <td><input type="number" id="open" name="open" required min="0" max="999"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="jodi">Jodi:</label></td>
+                        <td><input type="number" id="jodi" name="jodi" required min="0" max="999   "></td>
+                    </tr>
+                    <tr>
+                        <td><label for="close">Close:</label></td>
+                        <td><input type="number" id="close" name="close" required min="0" max="999"></td>
+                    </tr>                    
+                </table>
+            </form>
+            <!-- Close Button -->
+            <button onclick="document.getElementById('my-modal').close()">Close</button>
+            <button type="button" form="chatForm" onclick="submitChatForm(event)">Submit</button>
+        </dialog>
         <script src="./public/js/kalyanChatBoard.js"></script>
     </body>    
 </html>
